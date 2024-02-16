@@ -19,7 +19,7 @@ def get_session():
         settings.ASTRADB_CLIENT_ID, settings.ASTRADB_CLIENT_SECRET
     )
     try:
-        cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider)
+        cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider, connect_timeout=30)
         session = cluster.connect()
         connection.register_connection(str(session), session=session)
         connection.set_default_connection(str(session))
