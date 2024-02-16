@@ -6,7 +6,7 @@ This llm_backend project is a FastAPI application that provides functionality fo
 
 This project is built using the FastAPI framework in Python. It provides functionality for code generation using langchain and openAI, token management, and more. The project structure is organized as follows:
 
-```
+```bash
 root
 |---- main.py
 |---- venv
@@ -41,29 +41,33 @@ root
 ## Installation
 
 1. Clone the repository:
-   ```
-   git clone https://github.com/intelops/compage.git
+
+   ```bash
+   git clone https://github.com/MrAzharuddin/backend_llm
    ```
 
 2. Navigate to the project directory:
-   ```
+
+   ```bash
    cd compage/backend_llm
    ```
 
 3. Create a virtual environment (optional but recommended):
-   ```
+
+   ```bash
    python3.8 -m venv venv
    source venv/bin/activate
    ```
 
 4. Install project dependencies:
-   ```
+   ```bash
    pip install -r requirements.txt
    ```
 
 ## Usage
 
 1. Run the FastAPI application:
+
    ```python
    python3 main.py
    ```
@@ -79,7 +83,7 @@ root
 
 To run tests, use the following command from the project root directory:
 
-```
+```bash
 pytest .
 ```
 

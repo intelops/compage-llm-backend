@@ -6,3 +6,4 @@ connect_bundle
 .env.development
 .pytest_cache
 pytest.ini
+start.sh
