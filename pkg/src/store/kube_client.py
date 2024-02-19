@@ -1,3 +1,7 @@
+"""
+This module provides functionality for interacting with the Kubernetes client.
+It initializes the Kubernetes client using the kubernetes library and environment settings.
+"""
 # pkg/src/store/kube_client.py
 from kubernetes import client, config
 from pkg.src.config.env_config import settings
@@ -13,9 +17,9 @@ settings = settings()
 
 def initialize_kube_client():
     if settings.ENVIRONMENT == "development":
-        kube_config = config.load_kube_config()
+        config.load_kube_config()
     else:
-        kube_config = config.load_incluster_config()
+        config.load_incluster_config()
 
     return client.CustomObjectsApi()
 

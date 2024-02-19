@@ -51,8 +51,7 @@ async def code_generate(request_body: GPTRequest, token: str = Depends(JWTBearer
     # prompt template for the code generation
     code_template = PromptTemplate(
         input_variables=["lang", "top"],
-        template="{top}"
-        + " using {lang} language with proper inline comments. The code and code explanation document should be in markdown code format.",
+        template="{top}" + " using {lang} language with proper inline comments. The code and code explanation document should be in markdown code format.",
     )
 
     # code_explain_template = PromptTemplate(
@@ -63,8 +62,7 @@ async def code_generate(request_body: GPTRequest, token: str = Depends(JWTBearer
     # )
     code_flow_template = PromptTemplate(
         input_variables=["top"],
-        template="Generate the diagram flow "
-        + "for {top} in proper markdown format in mermaid code block",
+        template="Generate the diagram flow " + "for {top} in proper markdown format in mermaid code block",
     )
 
     # code_testcase_template = PromptTemplate(
