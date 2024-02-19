@@ -1,5 +1,6 @@
 import openai
 
+
 def openai_apikey_valid(API_KEY: str):
     openai.api_key = API_KEY
 

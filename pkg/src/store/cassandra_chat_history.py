@@ -17,4 +17,3 @@ def chat_history_store(username: str, session: Session):
         table_name=TABLE_NAME,
     )
     return memory_history
-
