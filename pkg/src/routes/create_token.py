@@ -13,6 +13,7 @@ from pkg.src.utils.openai_validator import openai_apikey_valid
 router = APIRouter()
 ACCESS_TOKEN_EXPIRE_MINUTES = 7200
 
+
 @router.post("/create-token")
 async def create_token(openai_apikey_request: openAI_API_KEY_request_schema):
     # validation
@@ -55,7 +56,7 @@ async def create_token(openai_apikey_request: openAI_API_KEY_request_schema):
             response.set_cookie(
                 key="access_token",
                 value=access_token,
-                expires=ACCESS_TOKEN_EXPIRE_MINUTES*60,
+                expires=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
                 httponly=True,
             )
 

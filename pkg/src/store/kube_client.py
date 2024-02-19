@@ -10,6 +10,7 @@ from pkg.src.constants.store import (
 
 settings = settings()
 
+
 def initialize_kube_client():
     if settings.ENVIRONMENT == "development":
         kube_config = config.load_kube_config()

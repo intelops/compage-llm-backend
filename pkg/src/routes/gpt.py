@@ -86,7 +86,9 @@ async def code_generate(request_body: GPTRequest, token: str = Depends(JWTBearer
     # )
 
     # create the  OpenAI LLM model
-    open_ai_llm = OpenAI(temperature=0.7, max_tokens=2048, model="gpt-3.5-turbo-instruct")
+    open_ai_llm = OpenAI(
+        temperature=0.7, max_tokens=2048, model="gpt-3.5-turbo-instruct"
+    )
 
     # create a chain to generate the code
     code_chain = LLMChain(
@@ -184,7 +186,9 @@ async def doc_generate(request_body: GPTRequest, token: str = Depends(JWTBearer(
     os.environ["OPENAI_API_KEY"] = res["api_key"]
 
     # create the OpenAI LLM model
-    open_ai_llm = OpenAI(temperature=0.7, max_tokens=2048, model="gpt-3.5-turbo-instruct")
+    open_ai_llm = OpenAI(
+        temperature=0.7, max_tokens=2048, model="gpt-3.5-turbo-instruct"
+    )
 
     # prompt template for the code generation
     prompt_template = PromptTemplate(
@@ -216,8 +220,10 @@ async def doc_generate(request_body: GPTRequest, token: str = Depends(JWTBearer(
             full_response += response["docs"]
             print(response)
             # Update memory for context
-            documentation_memory.save_context({"top": chunk}, outputs={"docs": response["docs"]})
-            
+            documentation_memory.save_context(
+                {"top": chunk}, outputs={"docs": response["docs"]}
+            )
+
         except Exception as e:
             # Handle errors gracefully
             raise HTTPException(
@@ -233,8 +239,11 @@ async def doc_generate(request_body: GPTRequest, token: str = Depends(JWTBearer(
         "data": {"docs": full_response},
     }
 
+
 # Helper function for prompt tokenization
 def tokenize_prompt(prompt, chunk_size=1000, chunk_overlap=200):
-    text_splitter = TokenTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+    text_splitter = TokenTextSplitter(
+        chunk_size=chunk_size, chunk_overlap=chunk_overlap
+    )
     prompt_chunks = text_splitter.split_text(prompt)
     return prompt_chunks

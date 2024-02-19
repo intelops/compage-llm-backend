@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM python:3.8.10-slim as builder
+FROM python:3.8.10-slim AS builder
 
 WORKDIR /app
 
