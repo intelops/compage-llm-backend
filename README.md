@@ -63,6 +63,22 @@ root
    ```bash
    pip install -r requirements.txt
    ```
+5. Setup the database:
+   [Follow these steps Datastax Docs](https://docs.datastax.com/en/astra/astra-db-vector/databases/python-driver.html)
+
+6. Create an environment variable (.env.development) for your Database credentials and JWT setup:
+
+   ```shell
+      JWT_SECRET=GENERATE_YOUR_SECRET_HERE
+      JWT_ALGORITHM=HS256
+      ENVIRONMENT=development
+
+
+      ASTRADB_KEYSPACE=compage_gpt
+      ASTRADB_CLIENT_SECRET=
+      ASTRADB_CLIENT_ID=
+      ASTRADB_TOKEN=
+   ```
 
 ## Usage
 
