@@ -89,7 +89,6 @@ async def code_generate(request_body: GPTRequest, token: str = Depends(JWTBearer
             "message": "Code generated successfully",
         }
 
-
     except Exception as e:
         raise HTTPException(
             status_code=404,

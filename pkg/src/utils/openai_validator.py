@@ -1,5 +1,6 @@
 import openai
 
+
 def openai_apikey_valid(api_key: str):
     """
     A function to set the OpenAI API key and test its validity.
@@ -7,7 +8,6 @@ def openai_apikey_valid(api_key: str):
     """
 
     openai.api_key = api_key
-
 
     # Test if the API key is valid. If it is not, it will throw an error.
     # If it is valid, it will return True.
