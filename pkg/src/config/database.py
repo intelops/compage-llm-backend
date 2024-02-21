@@ -1,7 +1,6 @@
 """Module providing a function printing python version."""
 
 from cassandra import Unauthorized
-
 # pylint: disable = no-name-in-module
 from cassandra.cluster import Cluster
 from cassandra.auth import PlainTextAuthProvider

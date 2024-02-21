@@ -41,6 +41,7 @@ async def code_generate(request_body: GPTRequest, token: str = Depends(JWTBearer
     # query to get api_key
     query = OpenAI_Token.objects.filter(username=username).allow_filtering()
 
+    # get api-key from the store
     res = query.first()
 
     if query.count() < 1:
@@ -87,6 +88,7 @@ async def code_generate(request_body: GPTRequest, token: str = Depends(JWTBearer
             "code": 200,
             "message": "Code generated successfully",
         }
+
 
     except Exception as e:
         raise HTTPException(
