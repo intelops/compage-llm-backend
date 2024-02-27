@@ -43,13 +43,13 @@ root
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/MrAzharuddin/backend_llm
+   git clone https://github.com/intelops/compage-llm-backend
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd compage/backend_llm
+   cd compage-llm-backend
    ```
 
 3. Create a virtual environment (optional but recommended):

@@ -7,3 +7,4 @@ connect_bundle
 .pytest_cache
 pytest.ini
 start.sh
+log.txt

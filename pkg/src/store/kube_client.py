@@ -5,12 +5,13 @@ It initializes the Kubernetes client using the kubernetes library and environmen
 
 # pkg/src/store/kube_client.py
 from kubernetes import client, config
+
 from pkg.src.config.env_config import settings
 from pkg.src.constants.store import (
     compage_gpt_group,
-    compage_gpt_version,
-    compage_gpt_plural,
     compage_gpt_kind,
+    compage_gpt_plural,
+    compage_gpt_version,
 )
 
 settings = settings()

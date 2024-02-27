@@ -1,5 +1,6 @@
-from pkg.src.schemas.token import TokenCreate
 import uuid
+
+from pkg.src.schemas.token import TokenCreate
 
 api_key_store = []
 

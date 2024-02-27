@@ -1,19 +1,19 @@
-from datetime import datetime
-from pkg.src.config.env_config import settings
-from cassandra.cqlengine.models import Model
-from cassandra.cqlengine import columns
-
 import uuid
+from datetime import datetime
 
+from cassandra.cqlengine import columns
+from cassandra.cqlengine.models import Model
+
+from pkg.src.config.env_config import settings
 
 settings = settings()
 
 
 class OpenAI_Token(Model):
     __keyspace__ = settings.ASTRADB_KEYSPACE
-    id = columns.UUID(primary_key=True, partition_key=True, default=uuid.uuid1)
+    id = columns.UUID(primary_key=True, default=uuid.uuid1)
     api_key = columns.Text()
-    username = columns.Text()
+    username = columns.Text(partition_key=True)
     created_at = columns.DateTime(default=datetime.utcnow())
     updated_at = columns.DateTime(default=datetime.utcnow())
 
