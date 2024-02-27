@@ -1,6 +1,8 @@
-# LLM Backend
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![Pull Request](https://github.com/intelops/compage-llm-backend/actions/workflows/ci.yml/badge.svg) ![CodeQL](https://github.com/intelops/compage-llm-backend/actions/workflows/github-code-scanning/codeql/badge.svg) ![Python](https://img.shields.io/badge/python-3.8-blue.svg)
 
-This llm_backend project is a FastAPI application that provides functionality for code generation, token management for compageGPT
+# Compage LLM Backend
+
+This compage llm backend project is a FastAPI application that provides functionality for code generation, token management, unit test generation for compageGPT
 
 ## Overview
 
@@ -85,10 +87,12 @@ root
 1. Run the FastAPI application:
 
    ```python
-   python3 main.py
+   python main.py
    ```
 
 2. Access the API at `http://localhost:8000`.
+
+3. Checkout the swagger documentation at [docs](http://localhost:8000/docs).
 
 ## API Endpoints
 
