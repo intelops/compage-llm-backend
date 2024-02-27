@@ -1,5 +1,7 @@
 import openai
 
+from logger import logger
+
 
 def openai_apikey_valid(api_key: str):
     """
@@ -19,7 +21,7 @@ def openai_apikey_valid(api_key: str):
 
     except openai.OpenAIError as e:
         # Handle OpenAI API errors (e.g., invalid API key)
-        print(f"Error: {e}")
-        return False
+        logger.error(str(e))
+        return False, str(e)
     # The API key is valid if the request succeeds
-    return True
+    return True, ""

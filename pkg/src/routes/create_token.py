@@ -34,7 +34,9 @@ async def create_token(openai_apikey_request: openAI_API_KEY_request_schema):
 
     # OpenAI API key validation
     try:
-        openai_apikey_valid(openai_apikey_request.api_key)
+        status = openai_apikey_valid(openai_apikey_request.api_key)
+        if not status[0]:
+            raise HTTPException(status_code=400, detail=status[1])
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
 
