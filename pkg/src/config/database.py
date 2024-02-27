@@ -1,13 +1,12 @@
 """Module providing a function printing python version."""
 
 from cassandra import Unauthorized
-
-# pylint: disable = no-name-in-module
-from cassandra.cluster import Cluster
 from cassandra.auth import PlainTextAuthProvider
+from cassandra.cluster import Cluster
 from cassandra.cqlengine import connection
-from .env_config import settings
+from cassandra.policies import DCAwareRoundRobinPolicy
 
+from .env_config import settings
 
 settings = settings()
 
@@ -26,7 +25,11 @@ def get_session():
     )
     try:
         cluster = Cluster(
-            cloud=cloud_config, auth_provider=auth_provider, connect_timeout=30
+            cloud=cloud_config,
+            auth_provider=auth_provider,
+            connect_timeout=30,
+            protocol_version=4,
+            load_balancing_policy=DCAwareRoundRobinPolicy(local_dc="us-east-2"),
         )
         session = cluster.connect()
         connection.register_connection(str(session), session=session)

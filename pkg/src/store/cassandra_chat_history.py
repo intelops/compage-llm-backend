@@ -1,10 +1,10 @@
 import uuid
+
+from cassandra.cluster import Session
 from langchain.memory import CassandraChatMessageHistory
 
 from pkg.src.config.env_config import settings
 from pkg.src.constants.cassandra_store import TABLE_NAME
-
-from cassandra.cluster import Session
 
 settings = settings()
 

@@ -1,13 +1,15 @@
-from datetime import timedelta
 import os
+from datetime import timedelta
+
 from fastapi import APIRouter, HTTPException
-from fastapi.responses import JSONResponse
+
+from logger import logger
 
 # internal
 from pkg.src.constants.errors import INTERNAL_SERVER_ERROR
+from pkg.src.middleware.auth_handler import createJWT
 from pkg.src.models.openAI_Token import OpenAI_Token
 from pkg.src.schemas.OpenAI_token import openAI_API_KEY_request_schema
-from pkg.src.middleware.auth_handler import createJWT
 from pkg.src.utils.openai_validator import openai_apikey_valid
 
 router = APIRouter()
@@ -26,54 +28,53 @@ async def create_token(openai_apikey_request: openAI_API_KEY_request_schema):
         JSON response containing the access token and expires in time, or an error response.
     """
 
-    # validation
+    # Validation
     if openai_apikey_request.api_key == "" or openai_apikey_request.username == "":
         raise HTTPException(status_code=400, detail="Missing api_key or username")
 
-    # openai_apikey validation
+    # OpenAI API key validation
     try:
         openai_apikey_valid(openai_apikey_request.api_key)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
 
-    # main code starts here
     try:
         expires_delta = timedelta(minutes=24 * 60)  # Token expiration time
         token_data = {"sub": openai_apikey_request.username}
         access_token = createJWT(token_data, expires_delta)
 
-        # check if user already exists
-        query = OpenAI_Token.objects.filter(
-            username=openai_apikey_request.username
-        ).allow_filtering()
+        # Check if user already exists
+        query = OpenAI_Token.objects.filter(username=openai_apikey_request.username)
 
         if query.count() > 0:
+            # User already exists, return access_token and expires_in
             return {"access_token": access_token, "expires_in": expires_delta}
+        else:
+            # Main GPT logic begins here
+            os.environ["OPENAI_API_KEY"] = openai_apikey_request.api_key
 
-        # main gpt logic begins here
-        os.environ["OPENAI_API_KEY"] = openai_apikey_request.api_key
+            # Store api_key in database
+            result = OpenAI_Token.create_openai_apikey(
+                api_key=openai_apikey_request.api_key,
+                username=openai_apikey_request.username,
+            )
 
-        # store api_key in database
-        result = OpenAI_Token.create_openai_apikey(
-            api_key=openai_apikey_request.api_key,
-            username=openai_apikey_request.username,
-        )
+            response = {
+                "data": {
+                    "access_token": access_token,
+                    "expires_in": expires_delta,
+                    "data": {
+                        "id": str(result.id),
+                        "username": result.username,
+                    },
+                }
+            }
 
-        response = JSONResponse(
-            content={"data": {"access_token": access_token, "data": result}}
-        )
-        response.set_cookie(
-            key="access_token",
-            value=access_token,
-            expires=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
-            httponly=True,
-        )
+            # Final response
+            return response
 
-        # final response
-        return response
-
-    # exceptions
     except Exception as e:
+        logger.info(str(e))
         raise HTTPException(
             status_code=500,
             detail=INTERNAL_SERVER_ERROR,

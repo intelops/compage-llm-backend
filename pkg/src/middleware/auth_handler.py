@@ -1,7 +1,9 @@
 # pkg/src/utils/auth_handler.py
-from fastapi import HTTPException, Request
-import jwt
 from datetime import datetime, timedelta
+
+import jwt
+from fastapi import HTTPException, Request
+
 from pkg.src.config.env_config import settings
 
 settings = settings()

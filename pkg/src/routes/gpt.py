@@ -2,12 +2,12 @@ import os
 
 from fastapi import APIRouter, Depends, HTTPException
 from langchain.chains import LLMChain
-from langchain_openai import OpenAI
 from langchain.memory import ConversationBufferMemory
-from langchain.text_splitter import TokenTextSplitter
 
 # Langchain
 from langchain.prompts import PromptTemplate
+from langchain.text_splitter import TokenTextSplitter
+from langchain_openai import OpenAI
 
 from pkg.src.config.database import get_session
 from pkg.src.middleware.jwt_middleware import JWTBearer, get_current_username

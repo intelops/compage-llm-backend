@@ -1,10 +1,10 @@
 import uuid
-from cassandra.cqlengine.models import Model
-from cassandra.cqlengine import columns
 from datetime import datetime
-import pytz
+from typing import Any, Dict
 
-from typing import Dict, Any
+import pytz
+from cassandra.cqlengine import columns
+from cassandra.cqlengine.models import Model
 
 from pkg.src.config.env_config import settings
 

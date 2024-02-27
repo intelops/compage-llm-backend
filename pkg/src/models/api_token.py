@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field
 import uuid
+
+from pydantic import BaseModel, Field
 
 
 class API_KEY_Schema(BaseModel):

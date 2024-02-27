@@ -1,10 +1,10 @@
 """Module providing a function printing python version."""
 
 import os
-from pathlib import Path
 from functools import lru_cache
-from pydantic_settings import BaseSettings
+from pathlib import Path
 
+from pydantic_settings import BaseSettings
 
 os.environ["CQLENG_ALLOW_SCHEMA_MANAGEMENT"] = "1"
 
