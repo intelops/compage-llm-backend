@@ -30,7 +30,7 @@ isort==5.13.2
 jsonpatch==1.33
 jsonpointer==2.4
 kubernetes==27.2.0
-langchain==0.1.9
+langchain==0.1.11
 langchain-community==0.0.24
 langchain-core==0.1.26
 langchain-openai==0.0.7
