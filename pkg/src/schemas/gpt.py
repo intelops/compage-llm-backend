@@ -22,10 +22,12 @@ class GPTResponse(BaseModel):
 
     sub: str
 
+
 class OpenAIRequest(BaseModel):
     """
     OpenAIRequest schema for the request body of the OpenAI endpoint
     """
+
     openai_api_key: str
 
 
