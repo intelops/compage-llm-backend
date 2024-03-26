@@ -12,7 +12,6 @@ This project is built using the FastAPI framework in Python. It provides functio
 root
 |---- main.py
 |---- venv
-|---- connect_bundle
 |---- pkg
 |     |---- src
 |           |---- routes
@@ -20,25 +19,25 @@ root
 |           |---- configs
 |           |---- models
 |           |---- schemas
-|           |---- utils
 |           |---- store
 |           |---- __init__.py
 |
-|---- tests
-|      |----- test_ping.py
 | ---- Dockerfile
 |---- requirements.txt
+|---- Makefile
 |----.gitignore
-|----.env
-|----.env.example
 ... many more
 ```
 
 ## Features
 
-- **Token Management:** The project includes token management using JSON Web Tokens (JWT). Users can add their openAI api-keys and generate tokens for secure API access.
+- **Health:** The project provides an API endpoint `/api/health` that returns a simple "ok" response. This can be used to check if the server is up and running.
 
-- **Code Generation:** The project provides an API endpoint `/api/code_generate` that utilizes LangChain and OpenAI to generate code. It offers code flow and explanation as responses.
+- **Validate OpenAI API key:** The project provides an API endpoint `/api/validate_openai` that validates the OpenAI API key. It offers OpenAI Validation, explanation as responses.
+
+- **Unit Test Generation:** The project provides an API endpoint `/api/unit_test_generate` that utilizes LangChain and OpenAI to generate Unit Test Cases. It offers Unit Test Generation, explanation as responses.
+
+- **Documentation Generation:** The project provides an API endpoint `/api/doc_generate` that utilizes LangChain and OpenAI to generate documentation. It offers Documentation Generation, explanation as responses.
 
 ## Installation
 
@@ -66,20 +65,19 @@ root
    pip install -r requirements.txt
    ```
 5. Setup the database:
-   [Follow these steps Datastax Docs](https://docs.datastax.com/en/astra/astra-db-vector/databases/python-driver.html)
+   ```bash
+   # run the database setup using docker
+   docker run --name cassandra-backend-llm -p 9042:9042 cassandra:latest
 
-6. Create an environment variable (.env.development) for your Database credentials and JWT setup:
+   # execute the docker bash
+   docker exec -it cassandra-backend-llm bash
 
-   ```shell
-      JWT_SECRET=GENERATE_YOUR_SECRET_HERE
-      JWT_ALGORITHM=HS256
-      ENVIRONMENT=development
+   # enter the database
+   cqlsh
 
-
-      ASTRADB_KEYSPACE=compage_gpt
-      ASTRADB_CLIENT_SECRET=
-      ASTRADB_CLIENT_ID=
-      ASTRADB_TOKEN=
+   # create the keyspace
+   CREATE KEYSPACE IF NOT EXISTS backend_llm WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+   
    ```
 
 ## Usage
@@ -96,16 +94,11 @@ root
 
 ## API Endpoints
 
-- `/api/create-token`: Generate a JWT token by providing valid credentials.
-- `/api/code_generate`: Generate code using LangChain and OpenAI. Receive code flow and explanation as responses.
+- `/api/health`: Health check endpoint. Returns a simple "ok" response.
+- `/api/unit_test_generate`: Generate code using LangChain and OpenAI. Receive unit test flow and explanation as responses.
+- `/api/doc_generate`: Generate documentation using LangChain and OpenAI. Receive documentation flow and explanation as responses.
+- `/api/validate_openai`: Validate the OpenAI API key. Receive OpenAI Validation, explanation as responses.
 
-## Testing
-
-To run tests, use the following command from the project root directory:
-
-```bash
-pytest .
-```
 
 ## Dockerization
 
