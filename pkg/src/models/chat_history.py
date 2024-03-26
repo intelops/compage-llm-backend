@@ -1,3 +1,7 @@
+"""
+This module provides a class to store chat history in Cassandra.
+"""
+
 import uuid
 from datetime import datetime
 from typing import Any, Dict
@@ -6,13 +10,16 @@ import pytz
 from cassandra.cqlengine import columns
 from cassandra.cqlengine.models import Model
 
-from pkg.src.config.env_config import settings
-
-settings = settings()
+from pkg.src.config.database import KEYSPACE
 
 
-class Chat_History(Model):
-    __keyspace__ = settings.ASTRADB_KEYSPACE
+class ChatHistory(Model):
+    """
+    This class represents the chat history table in the Cassandra database.
+    """
+
+    __keyspace__ = KEYSPACE
+    __table_name__ = "chat_history"
     id = columns.UUID(primary_key=True, partition_key=True, default=uuid.uuid1)
     main_prompt = columns.Text()
     history = columns.Map(
@@ -30,8 +37,11 @@ class Chat_History(Model):
     @staticmethod
     def store_history_entry(
         main_prompt: str, prompt: str, language: str, code: Dict[str, Any]
-    ) -> "Chat_History":
-        current_history, _ = Chat_History.objects.get_or_create(
+    ) -> "ChatHistory":
+        """
+        Stores the chat history entry in the Cassandra database.
+        """
+        current_history, _ = ChatHistory.objects.get_or_create(
             main_prompt=main_prompt, defaults={"history": {}}
         )
         history_entry = {
