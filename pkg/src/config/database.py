@@ -3,11 +3,13 @@ from cassandra.cluster import (
     NoHostAvailable,
     NoConnectionsAvailable,
 )  # pylint: disable = no-name-in-module
+
+from cassandra.cluster import Cluster, NoHostAvailable, NoConnectionsAvailable # pylint: disable = no-name-in-module
+""" Module providing a function returning a cassandra session. """
 from cassandra.policies import DCAwareRoundRobinPolicy
 from cassandra.cqlengine.connection import register_connection, set_default_connection
 
 KEYSPACE = "backend_llm"
-
 
 def get_session():
     """
