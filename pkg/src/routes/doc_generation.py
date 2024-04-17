@@ -69,9 +69,7 @@ async def doc_generate(request_body: GPTRequest):
             full_response += response["docs"]
 
             # Update memory for context
-            doc_memory.save_context(
-                {"prompt": chunk}, outputs={"docs": response["docs"]}
-            )
+            doc_memory.save_context({"prompt": chunk}, outputs={"docs": response["docs"]})
 
         return {
             "status": "success",
@@ -89,8 +87,6 @@ def tokenize_prompt(prompt, chunk_size=1000, chunk_overlap=200):
     """
     tokenizes the prompt into chunks
     """
-    text_splitter = TokenTextSplitter(
-        chunk_size=chunk_size, chunk_overlap=chunk_overlap
-    )
+    text_splitter = TokenTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     prompt_chunks = text_splitter.split_text(prompt)
     return prompt_chunks

@@ -1,8 +1,8 @@
-from cassandra.cluster import (
+from cassandra.cluster import (  # pylint: disable = no-name-in-module
     Cluster,
     NoHostAvailable,
     NoConnectionsAvailable,
-)  # pylint: disable = no-name-in-module
+)
 from cassandra.policies import DCAwareRoundRobinPolicy
 from cassandra.cqlengine.connection import register_connection, set_default_connection
 
