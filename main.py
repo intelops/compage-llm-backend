@@ -20,13 +20,9 @@ async def lifespan(_: FastAPI):
     db_session = get_session()
     if not db_session:
         logger.error("Database connection failed!")
-        yield None
         return
     logger.info("Database connected!")
-    try:
-        yield db_session
-    finally:
-        db_session.close()
+    yield
 
 
 app = FastAPI(lifespan=lifespan)
