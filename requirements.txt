@@ -4,7 +4,7 @@ annotated-types==0.5.0
 anyio==3.7.1
 async-timeout==4.0.3
 attrs==23.1.0
-black==24.2.0
+black==24.3.0
 cachetools==5.3.1
 cassandra-driver==3.28.0
 certifi==2023.7.22
@@ -23,13 +23,13 @@ greenlet==2.0.2
 h11==0.14.0
 httpcore==0.17.3
 httpx==0.24.1
-idna==3.4
+idna==3.7
 iniconfig==2.0.0
 jsonpatch==1.33
 jsonpointer==2.4
 langchain==0.1.9
 langchain-community==0.0.24
-langchain-core==0.1.26
+langchain-core==0.1.35
 langchain-openai==0.0.7
 langsmith==0.1.8
 marshmallow==3.20.1
